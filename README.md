@@ -36,24 +36,23 @@ npm install
 
 5. Configure your database in `config/config.json`
 
-Default config is setup for usage with an ElephantSQL database instance, you need to provide the DB Url on the "url" key of the config.json file, key development.
+Default config is setup for usage with an ElephantSQL database instance, you need to provide the DB Url on the "url" key
+of the config.json file, key development.
 
 ```json
-// config/config.json
 {
   "development": {
     "url": "YOUR_ELEPHANTSQL_URL_HERE",
     "dialect": "postgres",
     "operatorsAliases": "0"
-  },
+  }
 }
 ```
-
 
 If planning to use this template with a docker database the config object should be changed to:
 
 ```json
-// config/config.json
+
 {
   "development": {
     "username": "postgres",
@@ -66,8 +65,8 @@ If planning to use this template with a docker database the config object should
 }
 ```
 
-And you must revert the changes on this line in models/index.js: https://github.com/Codaisseur/express-template/commit/ada7711c8b19c8f240bc61f94743213efe4a77d2#diff-18c449caa39363f82bacb4f7489e7783L15
-
+And you must revert the changes on this line in
+models/index.js: https://github.com/Codaisseur/express-template/commit/ada7711c8b19c8f240bc61f94743213efe4a77d2#diff-18c449caa39363f82bacb4f7489e7783L15
 
 6. Create database, run migrations & seed data
 
