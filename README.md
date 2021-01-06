@@ -1,8 +1,22 @@
 # Pop cat sing a song
 
 ## Stack
+
+### Frontend
+
 - JavaScript
+- React
+- Redux
+- Axios
+- Material-UI
+
+### Backend
+
+- Node.js
+- Express.js
+- JWT & BCrypt Authentication
 - PostgreSQL
+- Sequelize ORM
 
 ## Database architecture
 
@@ -18,17 +32,23 @@
 | POST   | '/authorized_post_request' | Test POST requests (token required) | none                  | yes  |
 
 ## Run in development mode
+
 Server starts on PORT=4000
 
 1. start server
+
 ```
 npm run start
 ```
+
 2. start server with `nodemon` in development mode
+
 ```
 npm run dev
 ```
-3. start server with delay on response 
+
+3. start server with delay on response
+
 ```
 npm run devdelay
 ```
