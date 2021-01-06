@@ -19,7 +19,6 @@
     "jwt",
     "sequelize"
   ],
-  "author": "Rein Op 't Land",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -27,8 +26,8 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
-    "pg": "^8.3.0",
-    "sequelize": "^6.3.4",
+    "pg": "^8.5.1",
+    "sequelize": "^6.3.5",
     "sequelize-cli": "^6.2.0"
   },
   "devDependencies": {
