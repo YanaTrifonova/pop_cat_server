@@ -8,9 +8,12 @@ module.exports = {
             "users",
             [
                 {
-                    name: "testuser",
+                    name: "test",
                     email: "test@test.com",
-                    password: bcrypt.hashSync("test1234", SALT_ROUNDS),
+                    password: bcrypt.hashSync("test", SALT_ROUNDS),
+                    color: "hsl(" + 360 * Math.random() + ',' +
+                           (25 + 70 * Math.random()) + '%,' +
+                           (85 + 10 * Math.random()) + '%)',
                     createdAt: new Date(),
                     updatedAt: new Date(),
                 },
@@ -18,6 +21,9 @@ module.exports = {
                     name: "dummy",
                     email: "a@a.com",
                     password: bcrypt.hashSync("a", SALT_ROUNDS),
+                    color: "hsl(" + 360 * Math.random() + ',' +
+                           (25 + 70 * Math.random()) + '%,' +
+                           (85 + 10 * Math.random()) + '%)',
                     createdAt: new Date(),
                     updatedAt: new Date(),
                 },

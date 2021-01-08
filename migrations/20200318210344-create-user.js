@@ -10,6 +10,7 @@ module.exports = {
             },
             name: {
                 type: Sequelize.STRING,
+                unique: true,
                 allowNull: false,
             },
             email: {
@@ -20,6 +21,9 @@ module.exports = {
             password: {
                 type: Sequelize.STRING,
                 allowNull: false,
+            },
+            color: {
+              type: Sequelize.STRING
             },
             createdAt: {
                 allowNull: false,
