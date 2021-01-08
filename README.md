@@ -20,6 +20,8 @@
 
 ## Database architecture
 
+![d](./media/readme/db_architecture.png?raw=true)
+
 ## Endpoints
 
 | Method | Path                       | Purpose                             | required parameters   | auth |
