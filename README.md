@@ -1,5 +1,9 @@
 # Pop cat sing a song
 
+Frontend repository - [link](https://github.com/YanaTrifonova/pop_cat)
+
+Backend repository - current
+
 ## Stack
 
 ### Frontend
