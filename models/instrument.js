@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             instrument.belongsTo(models.post);
 
-            instrument.hasOne(models.instrumentnote);
+            instrument.hasOne(models.instrumentsNote);
         }
     }
     instrument.init({
