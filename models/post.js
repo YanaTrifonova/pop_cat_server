@@ -51,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
         postDescription: {
-            type: DataTypes.TINYTEXT,
+            type: DataTypes.STRING(1000),
             allowNull: false,
         }
     }, {

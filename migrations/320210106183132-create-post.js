@@ -38,7 +38,7 @@ module.exports = {
                 allowNull: false,
             },
             postDescription: {
-                type: Sequelize.TEXT,
+                type: Sequelize.STRING(1000),
                 allowNull: false,
             },
             createdAt: {
