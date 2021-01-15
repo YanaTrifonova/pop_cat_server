@@ -35,10 +35,12 @@ Backend repository - current
 | POST   | '/signup'                     | Create a new user and get a token            | email, name, password                        | no   |
 | POST   | '/login'                      | Get a token with email & password            | email, password                              | no   |
 | GET    | '/me'                         | Get information of this user                 | none                                         | yes  |
+| GET    | '/cats'                       | Get all cats                                 | none                                         | no   |
+| GET    | '/instruments'                | Get all instruments                          | none                                         | no   |
 | GET    | '/songs'                      | Get all songs                                | none                                         | no   |
 | GET    | '/songs/:userId'              | Get my songs                                 | none                                         | yes  |
 | GET    | '/favourites/:userId'         | Get user's favourite songs                   | none                                         | yes  |
-| POST   | '/song/:userID'               | Create a new song                            | name, description, catId, instrumentId, song | yes  |
+| POST   | '/song'                       | Create a new song                            | name, description, catId, instrumentId, song | yes  |
 | PUT    | '/like/:userID/:postId'       | Increase/decrease like counter for the post  | none                                         | yes  |
 | PUT    | '/favourites/:userID/:postId' | Increase/decrease fav counter for the post   | none                                         | yes  |
 | DELETE | '/like/:userID/:postId'       | Decrease like counter for the post           | none                                         | yes  |
