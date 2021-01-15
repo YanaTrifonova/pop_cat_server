@@ -12,7 +12,7 @@ Backend repository - current
 - React
 - Redux
 - Axios
-- Material-UI
+- Bootstrap
 
 ### Backend
 
@@ -28,14 +28,22 @@ Backend repository - current
 
 ## Endpoints
 
-| Method | Path                       | Purpose                             | required parameters   | auth |
-| ------ | -------------------------- | ----------------------------------- | --------------------- | ---- |
-| GET    | '/'                        | Test if your server is running      | none                  | no   |
-| POST   | '/echo'                    | Test POST requests                  | none                  | no   |
-| POST   | '/signup'                  | Create a new user and get a token   | email, name, password | no   |
-| POST   | '/login'                   | Get a token with email & password   | email, password       | no   |
-| GET    | '/me'                      | Get information of this user        | none                  | yes  |
-| POST   | '/authorized_post_request' | Test POST requests (token required) | none                  | yes  |
+| Method | Path                          | Purpose                                      | required parameters                          | auth |
+| ------ | ----------------------------- | -------------------------------------------- | -------------------------------------------- | ---- |
+| GET    | '/'                           | Test if your server is running               | none                                         | no   |
+| POST   | '/echo'                       | Test POST requests                           | none                                         | no   |
+| POST   | '/signup'                     | Create a new user and get a token            | email, name, password                        | no   |
+| POST   | '/login'                      | Get a token with email & password            | email, password                              | no   |
+| GET    | '/me'                         | Get information of this user                 | none                                         | yes  |
+| GET    | '/songs'                      | Get all songs                                | none                                         | no   |
+| GET    | '/songs/:userId'              | Get my songs                                 | none                                         | yes  |
+| GET    | '/favourites/:userId'         | Get user's favourite songs                   | none                                         | yes  |
+| POST   | '/song/:userID'               | Create a new song                            | name, description, catId, instrumentId, song | yes  |
+| PUT    | '/like/:userID/:postId'       | Increase/decrease like counter for the post  | none                                         | yes  |
+| PUT    | '/favourites/:userID/:postId' | Increase/decrease fav counter for the post   | none                                         | yes  |
+| DELETE | '/like/:userID/:postId'       | Decrease like counter for the post           | none                                         | yes  |
+| DELETE | '/favourites/:userID/:postId' | Decrease fav counter for the post            | none                                         | yes  |
+| PATCH  | '/song/:userID/:postId'       | Change name or/and description of your post  | none                                         | yes  |
 
 ## Run in development mode
 
