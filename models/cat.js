@@ -5,7 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
     class cat extends Model {
         static associate(models) {
-            cat.belongsTo(models.post);
+            cat.hasMany(models.post);
         }
     }
     cat.init({
