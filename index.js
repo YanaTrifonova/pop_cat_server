@@ -3,10 +3,12 @@ const loggerMiddleWare = require("morgan");
 const corsMiddleWare = require("cors");
 const {PORT} = require("./config/constants");
 const authRouter = require("./routers/auth");
+const saveSongRouter = require("./routers/saveSong");
+const catsRouter = require("./routers/cats");
 
 const app = express();
 app.use(loggerMiddleWare("dev"));
-
+app.use(express.static('media'))
 const bodyParserMiddleWare = express.json();
 app.use(bodyParserMiddleWare);
 
@@ -25,6 +27,8 @@ app.post("/echo", (req, res) => {
 });
 
 app.use("/", authRouter);
+app.use(saveSongRouter);
+app.use(catsRouter);
 
 app.listen(PORT, () => {
     console.log(`Listening on port: ${PORT}`);
