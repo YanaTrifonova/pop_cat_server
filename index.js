@@ -5,14 +5,16 @@ const {PORT} = require("./config/constants");
 const authRouter = require("./routers/auth");
 const saveSongRouter = require("./routers/saveSong");
 const catsRouter = require("./routers/cats");
+const instrumentsRouter = require("./routers/instruments");
 
 const app = express();
+
+app.use(corsMiddleWare());
+
 app.use(loggerMiddleWare("dev"));
 app.use(express.static('media'))
 const bodyParserMiddleWare = express.json();
 app.use(bodyParserMiddleWare);
-
-app.use(corsMiddleWare());
 
 app.get("/", (req, res) => {
     res.send("Hi from express");
@@ -29,6 +31,7 @@ app.post("/echo", (req, res) => {
 app.use("/", authRouter);
 app.use(saveSongRouter);
 app.use(catsRouter);
+app.use(instrumentsRouter);
 
 app.listen(PORT, () => {
     console.log(`Listening on port: ${PORT}`);
