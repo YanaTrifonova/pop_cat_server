@@ -6,6 +6,7 @@ const authRouter = require("./routers/auth");
 const saveSongRouter = require("./routers/saveSong");
 const catsRouter = require("./routers/cats");
 const instrumentsRouter = require("./routers/instruments");
+const discoverRouter = require("./routers/discover");
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use("/", authRouter);
 app.use(saveSongRouter);
 app.use(catsRouter);
 app.use(instrumentsRouter);
+app.use(discoverRouter);
 
 app.listen(PORT, () => {
     console.log(`Listening on port: ${PORT}`);
