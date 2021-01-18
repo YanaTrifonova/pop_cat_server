@@ -45,7 +45,8 @@ Backend repository - current
 | PUT    | '/favourites/:userID/:postId' | Increase/decrease fav counter for the post   | none                                         | yes  |
 | DELETE | '/like/:userID/:postId'       | Decrease like counter for the post           | none                                         | yes  |
 | DELETE | '/favourites/:userID/:postId' | Decrease fav counter for the post            | none                                         | yes  |
-| PATCH  | '/song/:userID/:postId'       | Change name or/and description of your post  | none                                         | yes  |
+| PATCH  | '/song/:postId'               | Change name or/and description of your post  | none                                         | yes  |
+| DELETE | '/song/:postId'               | Delete your post                             | none                                         | yes  |
 
 ## Run in development mode
 
