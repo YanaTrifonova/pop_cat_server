@@ -8,12 +8,12 @@ const Users = require("../models").user;
 router.get('/songs/:userId', authMiddleware, async (req, res) => {
     try {
         const id = parseInt(req.params.userId);
-        const posts = await Posts.findAll({where : {userId : id}});
+        const posts = await Posts.findAll({where: {userId: id}});
         if (!posts) return res.status(404).send(`posts of ${userId} not found`);
 
         const catUrls = await Cats.findAll({attributes: ["id", "url", "name"]});
 
-        const users = await Users.findAll({attributes : ["id", "name"]});
+        const users = await Users.findAll({attributes: ["id", "name", "color"]});
 
         let newPosts = [];
         let elem;
@@ -25,16 +25,18 @@ router.get('/songs/:userId', authMiddleware, async (req, res) => {
 
             let user = users.find((user) => post.dataValues.userId === user.id);
             let userName = user.dataValues.name;
+            let userColor = user.dataValues.color;
 
             elem = {
-                id : post.dataValues.id,
+                id: post.dataValues.id,
                 song: post.dataValues.song,
                 postName: post.dataValues.postName,
                 postDescription: post.dataValues.postDescription,
                 catUrl: catUrl,
-                catName : catName,
+                catName: catName,
                 updatedAt: post.dataValues.updatedAt,
-                creator : userName,
+                creator: userName,
+                userColor: userColor,
             }
 
             newPosts.push(elem);
@@ -45,6 +47,49 @@ router.get('/songs/:userId', authMiddleware, async (req, res) => {
     } catch (e) {
         console.log(e.message);
     }
+});
+
+router.patch('/song/:postId', authMiddleware, async (req, res) => {
+    try {
+        const postId = parseInt(req.params.postId);
+
+        const newName = req.body.newName;
+        const newDescription = req.body.newDescription;
+
+        let post;
+
+        if (newName !== undefined) {
+            post = await Posts.update({postName: newName}, {where: {id: postId}});
+        }
+
+        if (newDescription !== undefined) {
+            console.log("newDescription !== undefined");
+            post = await Posts.update({postDescription: newDescription}, {where: {id: postId}});
+        }
+
+        console.log("post", post);
+
+        res.send(post);
+    } catch (e) {
+        console.log(e.message);
+    }
+});
+
+router.delete('/song/:postId', authMiddleware, async (req, res) => {
+   try {
+       const postId = parseInt(req.params.postId);
+       const postToDelete = await Posts.findByPk(postId);
+
+       if (!postToDelete) {
+           res.status(404).send(`Post number ${postId} not found`);
+       } else {
+           const deleted = await postToDelete.destroy();
+           res.json(deleted);
+       }
+
+   } catch (e) {
+       console.log(e.message);
+   }
 });
 
 module.exports = router;
