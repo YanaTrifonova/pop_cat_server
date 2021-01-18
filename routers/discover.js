@@ -11,7 +11,7 @@ router.get('/songs', async (req, res) => {
 
         const catUrls = await Cats.findAll({attributes: ["id", "url", "name"]});
 
-        const users = await Users.findAll({attributes : ["id", "name"]});
+        const users = await Users.findAll({attributes : ["id", "name", "color"]});
 
         let newPosts = [];
         let elem;
@@ -23,6 +23,7 @@ router.get('/songs', async (req, res) => {
 
             let user = users.find((user) => post.dataValues.userId === user.id);
             let userName = user.dataValues.name;
+            let userColor = user.dataValues.color;
 
             elem = {
                 id : post.dataValues.id,
@@ -33,6 +34,7 @@ router.get('/songs', async (req, res) => {
                 catName : catName,
                 updatedAt: post.dataValues.updatedAt,
                 creator : userName,
+                userColor: userColor,
             }
 
             newPosts.push(elem);
