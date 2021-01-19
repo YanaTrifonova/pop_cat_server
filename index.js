@@ -1,6 +1,6 @@
 const express = require("express");
 const loggerMiddleWare = require("morgan");
-const corsMiddleWare = require("cors");
+const cors = require("cors");
 const {PORT} = require("./config/constants");
 const authRouter = require("./routers/auth");
 const saveSongRouter = require("./routers/saveSong");
@@ -11,7 +11,7 @@ const mySongsRouter = require("./routers/mySongs");
 
 const app = express();
 
-app.use(corsMiddleWare());
+app.use(cors());
 
 app.use(loggerMiddleWare("dev"));
 app.use(express.static('media'))
