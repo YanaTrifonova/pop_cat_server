@@ -8,6 +8,7 @@ const catsRouter = require("./routers/cats");
 const instrumentsRouter = require("./routers/instruments");
 const discoverRouter = require("./routers/discover");
 const mySongsRouter = require("./routers/mySongs");
+const likesRouter = require("./routers/likes");
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use(catsRouter);
 app.use(instrumentsRouter);
 app.use(discoverRouter);
 app.use(mySongsRouter);
+app.use(likesRouter);
 
 app.listen(PORT, () => {
     console.log(`Listening on port: ${PORT}`);
