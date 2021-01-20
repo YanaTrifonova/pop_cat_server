@@ -26,8 +26,6 @@ router.post("/song", authMiddleware, async (req, res) => {
             postDescription : postDescription
         })
 
-        console.log("newPost", newPost);
-
         res.send(newPost);
 
     } catch (error) {
