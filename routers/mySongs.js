@@ -4,6 +4,7 @@ const authMiddleware = require("../auth/middleware");
 const Posts = require("../models").post;
 const Cats = require("../models").cat;
 const Users = require("../models").user;
+const Likes = require("../models").like;
 
 router.get('/songs/:userId', authMiddleware, async (req, res) => {
     try {
@@ -14,6 +15,8 @@ router.get('/songs/:userId', authMiddleware, async (req, res) => {
         const catUrls = await Cats.findAll({attributes: ["id", "url", "name"]});
 
         const users = await Users.findAll({attributes: ["id", "name", "color"]});
+
+        const likes = await Likes.findAll();
 
         let newPosts = [];
         let elem;
@@ -27,6 +30,11 @@ router.get('/songs/:userId', authMiddleware, async (req, res) => {
             let userName = user.dataValues.name;
             let userColor = user.dataValues.color;
 
+            const postLikes = likes.filter(
+                (like) => like.dataValues.postId.toString() === post.dataValues.id.toString()).length;
+
+            const isLikedByUser = likes.find((like) =>  post.id === like.postId && like.userId === user.dataValues.id) !== undefined;
+
             elem = {
                 id: post.dataValues.id,
                 song: post.dataValues.song,
@@ -37,6 +45,8 @@ router.get('/songs/:userId', authMiddleware, async (req, res) => {
                 updatedAt: post.dataValues.updatedAt,
                 creator: userName,
                 userColor: userColor,
+                likes: postLikes,
+                isLikedByUser : isLikedByUser,
             }
 
             newPosts.push(elem);
