@@ -1,10 +1,13 @@
 const Router = require("express");
 const router = new Router();
+
 const authMiddleware = require("../auth/middleware");
+
 const Posts = require("../models").post;
 const Cats = require("../models").cat;
 const Users = require("../models").user;
 const Likes = require("../models").like;
+const Favourites = require("../models").favorite;
 
 router.get('/songs/:userId', authMiddleware, async (req, res) => {
     try {
@@ -17,6 +20,8 @@ router.get('/songs/:userId', authMiddleware, async (req, res) => {
         const users = await Users.findAll({attributes: ["id", "name", "color"]});
 
         const likes = await Likes.findAll();
+
+        const favourites = await Favourites.findAll();
 
         let newPosts = [];
         let elem;
@@ -33,7 +38,14 @@ router.get('/songs/:userId', authMiddleware, async (req, res) => {
             const postLikes = likes.filter(
                 (like) => like.dataValues.postId.toString() === post.dataValues.id.toString()).length;
 
-            const isLikedByUser = likes.find((like) =>  post.id === like.postId && like.userId === user.dataValues.id) !== undefined;
+            const postFavourites = favourites.filter(
+                (favourite) => favourite.dataValues.postId.toString() === post.dataValues.id.toString()).length;
+
+            const isLikedByUser = likes.find(
+                (like) => post.id === like.postId && like.userId === user.dataValues.id) !== undefined;
+
+            const isFavouriteByUser = favourites.find(
+                (favourite) => post.id === favourite.postId && favourite.userId === user.dataValues.id) !== undefined;
 
             elem = {
                 id: post.dataValues.id,
@@ -46,7 +58,9 @@ router.get('/songs/:userId', authMiddleware, async (req, res) => {
                 creator: userName,
                 userColor: userColor,
                 likes: postLikes,
-                isLikedByUser : isLikedByUser,
+                favourites: postFavourites,
+                isLikedByUser: isLikedByUser,
+                isFavouriteByUser: isFavouriteByUser,
             }
 
             newPosts.push(elem);
@@ -86,20 +100,20 @@ router.patch('/song/:postId', authMiddleware, async (req, res) => {
 });
 
 router.delete('/song/:postId', authMiddleware, async (req, res) => {
-   try {
-       const postId = parseInt(req.params.postId);
-       const postToDelete = await Posts.findByPk(postId);
+    try {
+        const postId = parseInt(req.params.postId);
+        const postToDelete = await Posts.findByPk(postId);
 
-       if (!postToDelete) {
-           res.status(404).send(`Post number ${postId} not found`);
-       } else {
-           const deleted = await postToDelete.destroy();
-           res.json(deleted);
-       }
+        if (!postToDelete) {
+            res.status(404).send(`Post number ${postId} not found`);
+        } else {
+            const deleted = await postToDelete.destroy();
+            res.json(deleted);
+        }
 
-   } catch (e) {
-       console.log(e.message);
-   }
+    } catch (e) {
+        console.log(e.message);
+    }
 });
 
 module.exports = router;
