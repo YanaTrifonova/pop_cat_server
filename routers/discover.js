@@ -8,6 +8,8 @@ const Favourites = require("../models").favorite;
 
 router.get('/songs', async (req, res) => {
     try {
+        let userId = req.headers.userid;
+
         const posts = await Posts.findAll();
         if (!posts) return res.status(404).send("posts not found");
 
@@ -23,44 +25,46 @@ router.get('/songs', async (req, res) => {
         let elem;
 
         posts.forEach((post) => {
-            let cat = catUrls.find((cat) => cat.dataValues.id === post.dataValues.catId);
-            let catUrl = cat.dataValues.url;
-            let catName = cat.dataValues.name;
+                let cat = catUrls.find((cat) => cat.dataValues.id === post.dataValues.catId);
+                let catUrl = cat.dataValues.url;
+                let catName = cat.dataValues.name;
 
-            let user = users.find((user) => post.dataValues.userId === user.id);
-            let userName = user.dataValues.name;
-            let userColor = user.dataValues.color;
+                let user = users.find((user) => post.dataValues.userId === user.id);
 
-            const postLikes = likes.filter(
-                (like) => like.dataValues.postId.toString() === post.dataValues.id.toString()).length;
+                let userName = user.dataValues.name;
+                let userColor = user.dataValues.color;
 
-            const postFavourites = favourites.filter(
-                (favourite) => favourite.dataValues.postId.toString() === post.dataValues.id.toString()).length;
+                const postLikes = likes.filter(
+                    (like) => like.dataValues.postId.toString() === post.dataValues.id.toString()).length;
 
-            const isLikedByUser = likes.find(
-                (like) => post.id === like.postId && like.userId === user.dataValues.id) !== undefined;
+                const postFavourites = favourites.filter(
+                    (favourite) => favourite.dataValues.postId.toString() === post.dataValues.id.toString()).length;
 
-            const isFavouriteByUser = favourites.find(
-                (favourite) => post.id === favourite.postId && favourite.userId === user.dataValues.id) !== undefined;
+                const isLikedByUser = likes.find(
+                    (like) => post.id.toString() === like.postId.toString() && like.userId.toString() === userId.toString()) !== undefined;
 
-            elem = {
-                id: post.dataValues.id,
-                song: post.dataValues.song,
-                postName: post.dataValues.postName,
-                postDescription: post.dataValues.postDescription,
-                catUrl: catUrl,
-                catName: catName,
-                updatedAt: post.dataValues.updatedAt,
-                creator: userName,
-                userColor: userColor,
-                likes: postLikes,
-                favourites: postFavourites,
-                isLikedByUser: isLikedByUser,
-                isFavouriteByUser: isFavouriteByUser,
-            }
+                const isFavouriteByUser = favourites.find(
+                    (favourite) => post.id.toString() === favourite.postId.toString() && favourite.userId.toString()
+                                   === userId.toString()) !== undefined;
 
-            newPosts.push(elem);
-        })
+                elem = {
+                    id: post.dataValues.id,
+                    song: post.dataValues.song,
+                    postName: post.dataValues.postName,
+                    postDescription: post.dataValues.postDescription,
+                    catUrl: catUrl,
+                    catName: catName,
+                    updatedAt: post.dataValues.updatedAt,
+                    creator: userName,
+                    userColor: userColor,
+                    likes: postLikes,
+                    favourites: postFavourites,
+                    isLikedByUser: isLikedByUser,
+                    isFavouriteByUser: isFavouriteByUser,
+                }
+
+                newPosts.push(elem);
+            })
 
         res.send(newPosts);
 
