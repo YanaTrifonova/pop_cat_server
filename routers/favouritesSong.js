@@ -9,25 +9,22 @@ const Users = require("../models").user;
 const Likes = require("../models").like;
 const Favourites = require("../models").favorite;
 
-router.get('/favourites/:userId', authMiddleware, async (req, res) => {
+router.get('/favourites', authMiddleware, async (req, res) => {
     try {
-        const userId = parseInt(req.params.userId);
+        const userId = req.user.id;
 
-        const favouritePostsByUser = await Favourites.findAll({where : {userId : userId}});
+        const favouritePostsByUser = await Favourites.findAll({where: {userId: userId}});
         if (!favouritePostsByUser) return res.status(404).send(`Favourites of user number ${userId} not found`);
 
-        const posts = await Posts.findAll({where: {userId: userId}});
-        if (!posts) return res.status(404).send(`posts of ${userId} not found`);
-
-        let newPosts = [];
-
-        for (let fav of favouritePostsByUser) {
-            for (let post of posts) {
-                if (post.id === fav.postId) {
-                    newPosts.push(post);
-                }
+        const newPosts = await Posts.findAll({
+            include: {
+                model: Favourites,
+                where: {userId: userId},
+                required: true
             }
-        }
+        });
+
+        if (!newPosts) return res.status(404).send(`posts of ${userId} not found`);
 
         const catUrls = await Cats.findAll({attributes: ["id", "url", "name"]});
 
@@ -36,7 +33,6 @@ router.get('/favourites/:userId', authMiddleware, async (req, res) => {
         const likes = await Likes.findAll();
 
         const favourites = await Favourites.findAll();
-
 
         let favouritePosts = [];
         let elem;
@@ -57,10 +53,12 @@ router.get('/favourites/:userId', authMiddleware, async (req, res) => {
                 (favourite) => favourite.dataValues.postId.toString() === post.dataValues.id.toString()).length;
 
             const isLikedByUser = likes.find(
-                (like) => post.id === like.postId && like.userId === user.dataValues.id) !== undefined;
+                (like) => post.id.toString() === like.postId.toString() && like.userId.toString() === userId.toString())
+                                  !== undefined;
 
             const isFavouriteByUser = favourites.find(
-                (favourite) => post.id === favourite.postId && favourite.userId === user.dataValues.id) !== undefined;
+                (favourite) => post.id.toString() === favourite.postId.toString() && favourite.userId.toString()
+                               === userId.toString()) !== undefined;
 
             elem = {
                 id: post.dataValues.id,
