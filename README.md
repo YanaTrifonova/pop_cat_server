@@ -42,9 +42,9 @@ Backend repository - current
 | GET    | '/favourites/:userId'         | Get user's favourite songs                   | none                                         | yes  |
 | POST   | '/song'                       | Create a new song                            | name, description, catId, instrumentId, song | yes  |
 | POST   | '/like/:userId/:postId'       | Increase like counter for the post           | none                                         | yes  |
-| POST   | '/favourites/:userId/:postId' | Increase fav counter for the post            | none                                         | yes  |
+| POST   | '/favourite/:userId/:postId'  | Increase fav counter for the post            | none                                         | yes  |
 | DELETE | '/like/:userId/:postId'       | Decrease like counter for the post           | none                                         | yes  |
-| DELETE | '/favourites/:userId/:postId' | Decrease fav counter for the post            | none                                         | yes  |
+| DELETE | '/favourite/:userId/:postId'  | Decrease fav counter for the post            | none                                         | yes  |
 | PATCH  | '/song/:postId'               | Change name or/and description of your post  | none                                         | yes  |
 | DELETE | '/song/:postId'               | Delete your post                             | none                                         | yes  |
 
