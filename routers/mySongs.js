@@ -9,10 +9,10 @@ const Users = require("../models").user;
 const Likes = require("../models").like;
 const Favourites = require("../models").favorite;
 
-router.get('/songs/:userId', authMiddleware, async (req, res) => {
+router.get('/songs/me', authMiddleware, async (req, res) => {
     try {
-        const id = parseInt(req.params.userId);
-        const posts = await Posts.findAll({where: {userId: id}});
+        const userId = req.user.id;
+        const posts = await Posts.findAll({where: {userId: userId}});
         if (!posts) return res.status(404).send(`posts of ${userId} not found`);
 
         const catUrls = await Cats.findAll({attributes: ["id", "url", "name"]});
