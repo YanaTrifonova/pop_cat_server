@@ -17,7 +17,7 @@ router.delete('/like/:userId/:postId', authMiddleware, async (req, res) => {
             res.json(deleted);
         }
 
-        onsole.log("deleted", deleted);
+        console.log("deleted", deleted);
 
     } catch (e) {
         console.log(e.message);
@@ -29,14 +29,14 @@ router.post("/like", authMiddleware, async (req, res) => {
         const postId = req.body.postId;
         const userId = req.body.userId;
 
-       const newLike = await Likes.create({
-           userId : userId,
-           postId : postId,
-       });
+        const newLike = await Likes.create({
+            userId : userId,
+            postId : postId,
+        });
 
-       console.log("newLike", newLike);
+        console.log("newLike", newLike);
 
-       res.send(newLike);
+        res.send(newLike);
 
     } catch (e) {
         console.log(e.message);
