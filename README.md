@@ -28,25 +28,25 @@ Backend repository - current
 
 ## Endpoints
 
-| Method | Path                          | Purpose                                      | required parameters                          | auth |
-| ------ | ----------------------------- | -------------------------------------------- | -------------------------------------------- | ---- |
-| GET    | '/'                           | Test if your server is running               | none                                         | no   |
-| POST   | '/echo'                       | Test POST requests                           | none                                         | no   |
-| POST   | '/signup'                     | Create a new user and get a token            | email, name, password                        | no   |
-| POST   | '/login'                      | Get a token with email & password            | email, password                              | no   |
-| GET    | '/me'                         | Get information of this user                 | none                                         | yes  |
-| GET    | '/cats'                       | Get all cats                                 | none                                         | no   |
-| GET    | '/instruments'                | Get all instruments                          | none                                         | no   |
-| GET    | '/songs'                      | Get all songs                                | none                                         | no   |
-| GET    | '/songs/:userId'              | Get my songs                                 | none                                         | yes  |
-| GET    | '/favourites/:userId'         | Get user's favourite songs                   | none                                         | yes  |
-| POST   | '/song'                       | Create a new song                            | name, description, catId, instrumentId, song | yes  |
-| POST   | '/like/:userId/:postId'       | Increase like counter for the post           | none                                         | yes  |
-| POST   | '/favourite/:userId/:postId'  | Increase fav counter for the post            | none                                         | yes  |
-| DELETE | '/like/:userId/:postId'       | Decrease like counter for the post           | none                                         | yes  |
-| DELETE | '/favourite/:userId/:postId'  | Decrease fav counter for the post            | none                                         | yes  |
-| PATCH  | '/song/:postId'               | Change name or/and description of your post  | none                                         | yes  |
-| DELETE | '/song/:postId'               | Delete your post                             | none                                         | yes  |
+| Method | Path                          | Purpose                                      | auth |
+| ------ | ----------------------------- | -------------------------------------------- | ---- |
+| GET    | '/'                           | Test if your server is running               | no   |
+| POST   | '/echo'                       | Test POST requests                           | no   |
+| POST   | '/signup'                     | Create a new user and get a token            | no   |
+| POST   | '/login'                      | Get a token with email & password            | no   |
+| GET    | '/me'                         | Get information of this user                 | yes  |
+| GET    | '/cats'                       | Get all cats                                 | no   |
+| GET    | '/instruments'                | Get all instruments                          | no   |
+| GET    | '/songs'                      | Get all songs                                | no   |
+| GET    | '/songs/me'                   | Get my songs                                 | yes  |
+| GET    | '/favourites'                 | Get user's favourite songs                   | yes  |
+| POST   | '/song'                       | Create a new song                            | yes  |
+| PUT    | '/like/:userId/:postId'       | Increase like counter for the post           | yes  |
+| PUT    | '/favourite/:userId/:postId'  | Increase fav counter for the post            | yes  |
+| DELETE | '/like/:userId/:postId'       | Decrease like counter for the post           | yes  |
+| DELETE | '/favourite/:userId/:postId'  | Decrease fav counter for the post            | yes  |
+| PATCH  | '/song/:postId'               | Change name or/and description of your post  | yes  |
+| DELETE | '/song/:postId'               | Delete your post                             | yes  |
 
 ## Run in development mode
 
