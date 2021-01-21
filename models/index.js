@@ -16,6 +16,7 @@ if (config.use_env_variable) {
 } else {
     sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
+exports.sequelize = sequelize;
 
 fs
     .readdirSync(__dirname)
