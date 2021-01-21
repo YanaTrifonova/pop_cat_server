@@ -9,6 +9,9 @@ module.exports = (sequelize, DataTypes) => {
             post.belongsTo(models.cat);
             post.belongsTo(models.instrument);
 
+            post.hasMany(models.favorite);
+            post.hasMany(models.like);
+
             post.belongsToMany(models.user, {
                 through: models.like,
                 foreignKey: "postId"
