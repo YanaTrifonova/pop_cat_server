@@ -1,4 +1,7 @@
 # Pop cat sing a song
+ 👉 [Go to Pop-Cat website](https://pop-cat.netlify.app/) 👈
+
+## Repositories
 
 Frontend repository - [link](https://github.com/YanaTrifonova/pop_cat)
 
@@ -12,7 +15,7 @@ Backend repository - current
 - React
 - Redux
 - Axios
-- Bootstrap
+- React Bootstrap
 
 ### Backend
 
