@@ -14,16 +14,22 @@ router.post("/song", authMiddleware, async (req, res) => {
         const postName = req.body.postName;
         const postDescription = req.body.postDescription;
 
-        const catId = await Cat.findOne({where : {name : cat}, attributes : ["id"]});
-        const instrumentId = await Instrument.findOne({where : {name : instrument}, attributes : ["id"]});
+        const catId = await Cat.findOne({
+            where: {name: cat},
+            attributes: ["id"]
+        });
+        const instrumentId = await Instrument.findOne({
+            where: {name: instrument},
+            attributes: ["id"]
+        });
 
         const newPost = await Post.create({
-            userId : userId,
-            catId : catId.dataValues.id,
-            instrumentId : instrumentId.dataValues.id,
-            song : song,
-            postName : postName,
-            postDescription : postDescription
+            userId: userId,
+            catId: catId.dataValues.id,
+            instrumentId: instrumentId.dataValues.id,
+            song: song,
+            postName: postName,
+            postDescription: postDescription
         })
 
         res.send(newPost);

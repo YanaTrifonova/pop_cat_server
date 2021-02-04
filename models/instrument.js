@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
             instrument.hasOne(models.instrumentsNote);
         }
     }
+
     instrument.init({
         name: DataTypes.STRING,
     }, {

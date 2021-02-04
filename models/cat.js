@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
             cat.hasMany(models.post);
         }
     }
+
     cat.init({
         name: DataTypes.STRING,
         url: DataTypes.STRING

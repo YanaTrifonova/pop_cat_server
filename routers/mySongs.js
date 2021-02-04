@@ -103,8 +103,8 @@ router.delete('/song/:postId', authMiddleware, async (req, res) => {
     try {
         const postId = parseInt(req.params.postId);
         const postToDelete = await Posts.findByPk(postId);
-        const LikesToDelete = await Likes.findAll({where : {postId: postId}});
-        const FavouritesToDelete = await Favourites.findAll({where : {postId: postId}});
+        const LikesToDelete = await Likes.findAll({where: {postId: postId}});
+        const FavouritesToDelete = await Favourites.findAll({where: {postId: postId}});
 
         if (!postToDelete) {
             res.status(404).send(`Post number ${postId} not found`);

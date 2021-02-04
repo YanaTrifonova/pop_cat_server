@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
             favorite.belongsTo(models.post);
         }
     }
+
     favorite.init({
         userId: {
             type: DataTypes.INTEGER,
